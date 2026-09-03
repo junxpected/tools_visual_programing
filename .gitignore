@@ -1,0 +1,44 @@
+## Ignore Visual Studio temporary files, build results, and add-on files
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+# Build results
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Dd]ebug*/
+[Rr]elease*/
+x64/
+x86/
+# Visual Studio cache/options directory
+vs/
+# Test results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+# NuGet packages
+*.nupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+# Azure publish settings
+*.Publish.xml
+*.azurePubxml
+*.pubxml
+*.publishproj
+# OS generated files (Windows)
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+# Installer files
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+# Others
+*_i.c
+*_p.c
+*.pdb
+*.cachefile
