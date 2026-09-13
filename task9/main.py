@@ -1,49 +1,68 @@
 import tkinter as tk
+from tkinter import messagebox
 
 window = tk.Tk()
-window.title("Схема залу")
-window.geometry("400x420")
+window.title("Підбір тарифу")
+window.geometry("380x400")
 
-ROWS = 5
-COLS = 8
-SEAT_PRICE = 150  # грн за місце
+# тарифи, зашиті в код: (назва, ГБ інтернету, хвилини, SMS, ціна)
+tariffs = [
+    ("Базовий", 5, 100, 50, 150),
+    ("Стандарт", 15, 300, 200, 250),
+    ("Максимум", 30, 1000, 500, 400),
+    ("Безліміт", 100, 5000, 1000, 600),
+]
 
-selected_seats = set()
-buttons = {}
+tk.Label(window, text="Обсяг інтернету (ГБ):").pack(pady=(15, 0))
+spin_internet = tk.Spinbox(window, from_=0, to=200, increment=1)
+spin_internet.pack()
 
+tk.Label(window, text="Хвилини дзвінків:").pack(pady=(15, 0))
+spin_minutes = tk.Spinbox(window, from_=0, to=10000, increment=10)
+spin_minutes.pack()
 
-def toggle_seat(row, col):
-    seat = (row, col)
-    btn = buttons[seat]
+tk.Label(window, text="Кількість SMS:").pack(pady=(15, 0))
+spin_sms = tk.Spinbox(window, from_=0, to=2000, increment=10)
+spin_sms.pack()
 
-    if seat in selected_seats:
-        selected_seats.remove(seat)
-        btn.config(bg="lightgreen")
-    else:
-        selected_seats.add(seat)
-        btn.config(bg="red")
-
-    update_total()
-
-
-def update_total():
-    total = len(selected_seats) * SEAT_PRICE
-    label_total.config(text=f"Обрано місць: {len(selected_seats)} | Сума: {total} грн")
+label_result = tk.Label(window, text="", font=("TkDefaultFont", 10, "bold"), justify="left")
+label_result.pack(pady=25)
 
 
-frame_hall = tk.Frame(window)
-frame_hall.pack(pady=15)
+def find_tariff():
+    try:
+        internet = float(spin_internet.get())
+        minutes = float(spin_minutes.get())
+        sms = float(spin_sms.get())
+    except ValueError:
+        messagebox.showerror("Помилка", "Введіть коректні значення")
+        return
 
-for row in range(ROWS):
-    for col in range(COLS):
-        btn = tk.Button(
-            frame_hall, text=f"{row + 1}-{col + 1}", width=4, bg="lightgreen",
-            command=lambda r=row, c=col: toggle_seat(r, c)
+    best = None
+
+    for name, t_internet, t_minutes, t_sms, price in tariffs:
+        if internet <= t_internet and minutes <= t_minutes and sms <= t_sms:
+            if best is None or price < best[4]:
+                best = (name, t_internet, t_minutes, t_sms, price)
+
+    if best is None:
+        label_result.config(
+            text="Жоден тариф не покриває такі потреби.\nОбери 'Безліміт' або зменш обсяги."
         )
-        btn.grid(row=row, column=col, padx=2, pady=2)
-        buttons[(row, col)] = btn
+        return
 
-label_total = tk.Label(window, text="Обрано місць: 0 | Сума: 0 грн", font=("TkDefaultFont", 10, "bold"))
-label_total.pack(pady=20)
+    name, t_internet, t_minutes, t_sms, price = best
+    label_result.config(
+        text=(
+            f"Рекомендований тариф: {name}\n"
+            f"Інтернет: {t_internet} ГБ\n"
+            f"Хвилини: {t_minutes}\n"
+            f"SMS: {t_sms}\n"
+            f"Ціна: {price} грн/міс"
+        )
+    )
+
+
+tk.Button(window, text="Підібрати тариф", command=find_tariff).pack(pady=10)
 
 window.mainloop()
