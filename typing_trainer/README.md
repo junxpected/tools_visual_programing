@@ -19,7 +19,15 @@ python3 -m unittest discover -s tests -v
 
 ## Збірка
 
-Linux: `./build_linux.sh` створює `dist/TypeFlow-linux`.
+Linux: `./build_linux.sh` створює `dist/TypeFlow-linux.tar.gz`.
+
+Після завантаження Linux-архіву:
+
+```bash
+tar -xzf TypeFlow-linux.tar.gz
+chmod +x TypeFlow-linux
+./TypeFlow-linux
+```
 
 Windows: запустіть `build_windows.bat`; результат — `dist\\TypeFlow.exe`.
 
