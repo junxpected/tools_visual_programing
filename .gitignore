@@ -31,6 +31,13 @@ Thumbs.db
 ehthumbs.db
 [Dd]esktop.ini
 $RECYCLE.BIN/
+typing_trainer/settings.json
+typing_trainer/history.json
+typing_trainer/build/
+typing_trainer/dist/
+typing_trainer/*.spec
+__pycache__/
+*.py[cod]
 # Installer files
 *.cab
 *.msi
