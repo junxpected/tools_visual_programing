@@ -32,3 +32,22 @@ chmod +x TypeFlow-linux
 Windows: запустіть `build_windows.bat`; результат — `dist\\TypeFlow.exe`.
 
 Готові Linux і Windows артефакти збираються GitHub Actions під час release-тега `typeflow-v*`.
+
+## Завантаження програми
+
+- [Завантажити TypeFlow для Windows (.exe)](https://github.com/junxpected/tools_visual_programing/releases/download/typeflow-v1.0.0/TypeFlow.exe)
+- [Завантажити TypeFlow для Linux (.tar.gz)](https://github.com/junxpected/tools_visual_programing/releases/download/typeflow-v1.0.0/TypeFlow-linux.tar.gz)
+- [Переглянути всі релізи](https://github.com/junxpected/tools_visual_programing/releases)
+
+### Windows
+
+Завантажте `TypeFlow.exe` і запустіть подвійним кліком. Інсталяція Python не потрібна.
+
+### Linux
+
+```bash
+wget https://github.com/junxpected/tools_visual_programing/releases/download/typeflow-v1.0.0/TypeFlow-linux.tar.gz
+tar -xzf TypeFlow-linux.tar.gz
+chmod +x TypeFlow-linux
+./TypeFlow-linux
+```
